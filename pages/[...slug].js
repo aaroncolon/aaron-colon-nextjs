@@ -90,8 +90,7 @@ export async function getStaticProps({ params }) {
       data2,
       template,
       remoteContentUrl,
-      remoteContent = null,
-      revalidate = false
+      remoteContent = null
 
   const q = {
     query: `
@@ -189,7 +188,6 @@ export async function getStaticProps({ params }) {
     props: {
       pageData: data.pages.nodes[0],
       remoteContent: remoteContent
-    },
-    revalidate: revalidate
+    }
   }
 }
