@@ -90,7 +90,8 @@ export async function getStaticProps({ params }) {
       data2,
       template,
       remoteContentUrl,
-      remoteContent = null
+      remoteContent = null,
+      revalidate = false
 
   const q = {
     query: `
@@ -181,12 +182,14 @@ export async function getStaticProps({ params }) {
   if (remoteContentUrl) {
     const resRemote = await fetch(remoteContentUrl)
     remoteContent = await resRemote.json()
+    revalidate = data2.pages.nodes[0].template.acfRemoteContent.ttl
   }
 
   return {
     props: {
       pageData: data.pages.nodes[0],
       remoteContent: remoteContent
-    }
+    },
+    revalidate: revalidate
   }
 }
