@@ -181,7 +181,6 @@ export async function getStaticProps({ params }) {
   if (remoteContentUrl) {
     const resRemote = await fetch(remoteContentUrl)
     remoteContent = await resRemote.json()
-    revalidate = data2.pages.nodes[0].template.acfRemoteContent.ttl
   }
 
   return {
