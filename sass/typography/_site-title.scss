@@ -1,0 +1,23 @@
+.site-title {
+  font-family: $font__site-title;
+  font-size: 16px;
+  line-height: 50px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.site-title__link {
+  &:link,
+  &:visited {
+    color: $color__text-main;
+    text-decoration: none;
+  }
+}
+
+.site-title--first {
+  font-weight: 400;
+}
+
+.site-title--last {
+  font-weight: 600;
+}

@@ -1,0 +1,104 @@
+h1, h2, h3, h4, h5, h6 {
+	clear: both;
+  font-family: $font__heading;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+.title--section {
+  font-weight: 700;
+}
+
+.title--section-home {
+  @include font-size(1);
+  line-height: 1;
+  margin-top: 0;
+  text-transform: uppercase;
+}
+
+@media (min-width: $media__lg_min) {
+  .title--section-home {
+    @include font-size(0.875);
+    line-height: 1.2;
+    margin-top: -0.214285714285714em;
+    right: 100%;
+    text-align: right;
+    position: absolute;
+    z-index: 1;
+  }
+}
+
+.project__title {
+  color: $color__text-light;
+  font-weight: 700;
+  margin: 0;
+  position: relative;
+  text-shadow: 0 0 4px rgba(0,0,0,0.9);
+	text-transform: uppercase;
+
+  &:after {
+    background-color: $color__text-light;
+    bottom: 0;
+    content: '';
+    display: block;
+    height: 1px;
+    left: 0;
+    width: 100%;
+  }
+
+  &--text-only {
+    color: $color__text-main;
+    text-shadow: none;
+  }
+
+  &--text-only:after {
+    background-color: $color__text-main;
+  }
+}
+
+@media (min-width: $media__sm_min) {
+  .project__title {
+    @include font-size(1.5);
+
+    &:after {
+      transition: width 0.2s ease;
+      width: 0%;
+    }
+
+    &--text-only:after {
+      width: 100%;
+    }
+  }
+}
+
+.title--service,
+.title--tech-stack,
+.title--method {
+  font-weight: 700;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.title--tech-stack,
+.title--method {
+  @include font-size(0.75);
+}
+
+.title--service {
+	@include font-size(1.5);
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+@media (min-width: $media__sm_min) {
+  .title--tech-stack,
+  .title--method {
+    @include font-size(1);
+  }
+}
+
+.entry-title {
+  margin: 0.5em 0;
+  text-transform: uppercase;
+}

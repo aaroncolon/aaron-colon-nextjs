@@ -1,0 +1,27 @@
+.animate__animated {
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion) {
+  .animate__animated {
+    visibility: visible;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    // -webkit-transform: translate3d(0, 40px, 0);
+    // transform: translate3d(0, 40px, 0);
+    -webkit-transform: translateY(40px);
+    transform: translateY(40px);
+  }
+
+  100% {
+    opacity: 1;
+    // -webkit-transform: translateZ(0);
+    // transform: translateZ(0);
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}

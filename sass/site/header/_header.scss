@@ -1,0 +1,17 @@
+.site-header {
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  height: 50px;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 90;
+}
+
+.site-branding {
+  float: left;
+  padding-left: 15px;
+  position: relative;
+  z-index: 1;
+}

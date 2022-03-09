@@ -1,0 +1,41 @@
+.wpcf7 {
+  label {
+    font-family: $font__heading;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+}
+
+.wpcf7-text,
+input[type="email"].wpcf7-text,
+input[type="text"].wpcf7-text,
+.wpcf7-textarea {
+  @include font-size(1.125);
+  font-weight: 400;
+  padding: 20px;
+  width: 100%;
+}
+
+.wpcf7-submit,
+input[type="submit"].wpcf7-submit {
+  background: #333;
+  color: #fff;
+  font-family: $font__heading;
+  @include font-size(1.25);
+  font-weight: 600;
+  padding: 20px;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  width: 100%;
+
+  &:hover,
+  &:focus {
+    background: $color__link-hover;
+  }
+}
+
+.wpcf7-not-valid-tip,
+span.wpcf7-not-valid-tip {
+  font-family: $font__heading;
+  font-weight: 600;
+}

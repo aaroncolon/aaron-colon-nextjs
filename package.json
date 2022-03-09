@@ -1,0 +1,20 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "watch": "node-sass sass/ -o css/ --source-map true --output-style expanded --indent-type tab --indent-width 1 -w",
+    "compile:css": "node-sass sass/ -o css/ && stylelint '*.css' --fix || true && stylelint '*.css' --fix",
+    "compile:css-prod": "node-sass sass/ -o css/ --source-map true --output-style compressed"
+  },
+  "dependencies": {
+    "he": "^1.2.0",
+    "next": "latest",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "node-sass": "^7.0.1"
+  }
+}

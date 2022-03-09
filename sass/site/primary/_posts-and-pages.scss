@@ -1,0 +1,43 @@
+.sticky {
+	display: block;
+}
+
+.hentry {
+	margin: 0 0 1.5em;
+}
+
+.updated:not(.published) {
+	display: none;
+}
+
+.page-content,
+.entry-content,
+.entry-summary {
+	margin: 1.5em 0 0;
+}
+
+.entry-content--no-margin {
+  margin: 0;
+}
+
+.entry-content {
+	p {
+		a {
+			@include word-wrap()
+		}
+	}
+}
+
+.page-links {
+	clear: both;
+	margin: 0 0 1.5em;
+}
+
+.post-thumbnail-wrap {
+  height: 0;
+  position: relative;
+}
+
+.post-thumbnail-wrap + .post-thumbnail-wrap {
+  margin-top: 20px;
+}

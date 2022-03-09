@@ -1,0 +1,110 @@
+.demo-wrapper {
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+  min-height: 465px;
+  position: relative;
+
+  .demo {
+    padding: 60px 30px 60px;
+
+    &__title {
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    &__meta-row-list {
+      font-family: $font__heading;
+      @include font-size(0.875);
+      margin-bottom: 0;
+      text-transform: uppercase;
+    }
+
+    &__links {
+      font-family: $font__heading;
+      margin: 0;
+      list-style: none;
+
+      li {
+        display: inline-block;
+        @include font-size(0.875);
+        font-weight: bold;
+        text-transform: uppercase;
+
+        &::before {
+          content: "\00a0\00b7\00a0";
+        }
+
+        &:first-child::before {
+          content: none;
+        }
+      }
+    }
+
+    &__copy-wrap {
+      display: none;
+
+      &--visible {
+        background: #fff;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        height: 100%;
+        justify-content: flex-end;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+    }
+
+    &__copy {
+      font-weight: 400;
+      padding: 30px 30px 50px;
+      text-transform: none;
+
+      p {
+        margin-bottom: 0;
+      }
+    }
+
+    &__copy-close {
+      background-color: #333;
+      border-radius: 0;
+      border: 0 none;
+      color: #fff;
+      display: block;
+      font-family: $font__heading;
+      font-size: 14px;
+      font-weight: 700;
+      margin: 20px 20px 0 0;
+      padding: 10px;
+      position: absolute;
+      right: 0;
+      text-transform: uppercase;
+      top: 0;
+      z-index: 1;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+  }
+}
+
+@media (min-width: 37.5em) { // 500
+  .col-sm-6--demos {
+    width: 50%;
+  }
+}
+
+@media (min-width: $media__md_min) {
+  .col-sm-6--demos.col-md-4 {
+    width: 33.33333333%
+  }
+}
