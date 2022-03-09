@@ -102,6 +102,7 @@ export async function getStaticProps({ params }) {
     props: {
       pageData: data.pages.nodes[0],
       demosData: data.demos
-    }
+    },
+    revalidate: 900
   }
 }
