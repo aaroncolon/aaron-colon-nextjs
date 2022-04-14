@@ -87,13 +87,13 @@ export function ProjectContent({ data }) {
               <h2>Links</h2>
               <ul className="links__list">
                 {
-                  data.acfProjects.links.map((item, index) => {
+                  (data.acfProjects.links) ? data.acfProjects.links.map((item, index) => {
                     return (
                       <li key={`link-${index}`} className="links__list-item">
                         <a target="_blank" href={item.url}>{item.linkText}</a>
                       </li>
                     )
-                  })
+                  }) : <li className="links__list-item">No Links Available</li>
                 }
               </ul>
             </div>
