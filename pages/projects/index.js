@@ -92,6 +92,7 @@ export async function getStaticProps({ params }) {
     props: {
       pageData: data.pages,
       projectsData: data.projects
-    }
+    },
+    revalidate: 900
   }
 }
