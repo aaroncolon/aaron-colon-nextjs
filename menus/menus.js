@@ -1,6 +1,6 @@
 export const menuPrimary = [
   {
-    slug: "/#projects",
+    slug: "/projects",
     label: "Projects"
   },
   {
