@@ -24,6 +24,14 @@ class Demo extends React.Component {
     }))
   }
 
+  doClasses() {
+    const data = this.props.data,
+          classesTech      = data.technologies.nodes.map(item => `tech--${item.slug}`),
+          classesDev       = data.developmentTypes.nodes.map(item => `dev--${item.slug}`),
+          classesPlatforms = data.platforms.nodes.map(item => `platform--${item.slug}`)
+    return [...classesTech, ...classesDev, ...classesPlatforms].join(' ')
+  }
+
   render() {
     const data         = this.props.data
     const technologies = data.technologies.nodes.map(item => item.name).join(', ')
@@ -36,9 +44,10 @@ class Demo extends React.Component {
         </li>
       )
     })
+    const classes = this.doClasses()
 
     return (
-      <div className="demo-col col-xs-12 col-sm-6--demos col-sm-6 col-md-4">
+      <div className={`demo-col col-xs-12 col-sm-6--demos col-sm-6 col-md-4 ${classes}`}>
         <div className="demo-wrapper">
           <div className="demo demo-0">
             <div className="demo__title-wrap">

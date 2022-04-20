@@ -1,11 +1,39 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Head from 'next/head'
 import Layout from '../../components/Layout'
 import Demo from '../../components/demos/Demo'
+import DemoFilters from '../../components/demos/DemoFilters'
 
 import { fetchApi } from '../../lib/api'
 
 export default function Demos({ pageData, demosData }) {
+  const { _demos, _filters } = parseDemosData(demosData)
+
+  const [demos, setDemos] = useState(demosData)
+
+  function handleClickFilter(item) {
+    const { type, slug } = item
+
+    // filter _demos to match type and slug
+    const filteredIds = _demos.filter(item => {
+      return item[type][slug]
+    })
+
+    // Filter demos by matched IDs
+    let filteredDemos = {
+      nodes: []
+    }
+    filteredIds.forEach(item => {
+      for (let i = 0; i < demosData.nodes.length; i++) {
+        if (item.id === demosData.nodes[i].demoId) {
+          filteredDemos.nodes.push(demosData.nodes[i])
+        }
+      }
+    })
+
+    setDemos(filteredDemos)
+  }
+
   return (
     <Layout classContentArea="full-width">
       <Head>
@@ -19,11 +47,17 @@ export default function Demos({ pageData, demosData }) {
         </div>
       </header>
       <div className="entry-content entry-content--no-margin">
+      <section className="section section-demos-filters">
+        <div className="container">
+          <DemoFilters filtersData={_filters} handleClickFilter={handleClickFilter} />
+        </div>
+      </section>
+
         <section className="section section-demos">
           <div className="container">
             <div className="row">
               {
-                demosData.nodes.map((item, i) => {
+                demos.nodes.map((item, i) => {
                   return <Demo data={item} key={`demo-${i}`} />
                 })
               }
@@ -33,6 +67,53 @@ export default function Demos({ pageData, demosData }) {
       </div>
     </Layout>
   )
+}
+
+function parseDemosData(demosData) {
+  let _demos,
+      _filters = {
+        tech: {},
+        dev: {},
+        platforms: {}
+      }
+
+  _demos = demosData.nodes.map(item => {
+    const id   = item.demoId,
+          slug = item.slug,
+          show = true,
+          techObj = {},
+          devObj = {},
+          platObj = {}
+
+    item.technologies.nodes.forEach(item => {
+      techObj[item.slug] = item.slug
+      _filters.tech[item.slug] = item.slug
+    })
+
+    item.developmentTypes.nodes.forEach(item => {
+      devObj[item.slug] = item.slug
+      _filters.dev[item.slug] = item.slug
+    })
+
+    item.platforms.nodes.forEach(item => {
+      platObj[item.slug] = item.slug
+      _filters.platforms[item.slug] = item.slug
+    })
+
+    return {
+      id,
+      slug,
+      show,
+      tech : techObj,
+      dev : devObj,
+      platforms: platObj
+    }
+  })
+
+  return {
+    _demos,
+    _filters
+  }
 }
 
 export async function getStaticProps({ params }) {
@@ -66,21 +147,25 @@ export async function getStaticProps({ params }) {
           }
         ) {
           nodes {
+            demoId
             slug
             title
             technologies {
               nodes {
                 name
+                slug
               }
             }
             developmentTypes {
               nodes {
                 name
+                slug
               }
             }
             platforms {
               nodes {
                 name
+                slug
               }
             }
             content(format: RENDERED)

@@ -1,3 +1,44 @@
+.demos-filters {
+  margin-bottom: 20px;
+
+  &__title {
+    text-transform: uppercase;
+  }
+
+  &__inner {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+
+  &__label {
+    display: block;
+    @include font-size(0.75);
+    text-transform: uppercase;
+  }
+
+  .filter {
+    background-color: #333;
+    border-radius: 0;
+    border: 0 none;
+    color: #fff;
+    display: inline-block;
+    font-family: $font__heading;
+    font-size: 10px;
+    font-weight: 700;
+    margin: 0 2px 4px;
+    padding: 8px 10px;
+    text-transform: uppercase;
+    transition: background-color 0.2s;
+    vertical-align: middle;
+
+    &:hover,
+    &:focus {
+      background-color: $color__link;
+      cursor: pointer;
+    }
+  }
+}
+
 .demo-wrapper {
   border: 1px solid #ccc;
   display: flex;
