@@ -1,24 +1,36 @@
+import { useState } from 'react'
+import FilterButton from './FilterButton'
+
 function DemoFilters(props) {
-  const filtersTech = [],
-        filtersDev  = [],
-        filtersPlat = []
+  const [filters, setFilters] = useState(props.filtersData)
 
-  for (let obj in props.filtersData.tech) {
-    if (props.filtersData.tech.hasOwnProperty(obj)) {
-      filtersTech.push(obj)
+  function handleSetFilters({ slug, type }) {
+    for (const prop in filters) {
+      if (filters.hasOwnProperty(prop)) {
+        for (const prop2 in filters[prop]) {
+          if (filters[prop].hasOwnProperty(prop2)) {
+            if (slug === filters[prop][prop2].slug && type === filters[prop][prop2].type) {
+              filters[prop][prop2].active = true
+            } else {
+              filters[prop][prop2].active = false
+            }
+          }
+        }
+      }
     }
+    
+    setFilters(filters)
   }
 
-  for (let obj in props.filtersData.dev) {
-    if (props.filtersData.dev.hasOwnProperty(obj)) {
-      filtersDev.push(obj)
+  function doFilterBtns(_type) {
+    const btns = []
+    let i = 0
+    for (const prop in filters[_type]) {
+      const { type, slug, active } = filters[_type][prop]
+      btns.push(<FilterButton key={`${_type}-${i}`} handleClickFilter={props.handleClickFilter} handleSetActive={handleSetFilters} type={type} slug={slug} active={active} />)
+      i++
     }
-  }
-
-  for (let obj in props.filtersData.platforms) {
-    if (props.filtersData.platforms.hasOwnProperty(obj)) {
-      filtersPlat.push(obj)
-    }
+    return btns
   }
 
   return (
@@ -27,35 +39,22 @@ function DemoFilters(props) {
       <div className="demos-filters__group">
         <label className="demos-filters__label"><b>Tech</b></label>
         {
-          filtersTech.sort().map((item, i) => <FilterButton key={`tech-${i}`} handleClickFilter={props.handleClickFilter} type='tech' slug={item} />)
+          doFilterBtns('tech')
         }
       </div>
       <div className="demos-filters__group">
         <label className="demos-filters__label"><b>Dev</b></label>
         {
-          filtersDev.sort().map((item, i) => <FilterButton key={`dev-${i}`} handleClickFilter={props.handleClickFilter} type='dev' slug={item} />)
+          doFilterBtns('dev')
         }
       </div>
       <div className="demos-filters__group">
         <label className="demos-filters__label"><b>Platforms</b></label>
         {
-          filtersPlat.sort().map((item, i) => <FilterButton key={`plat-${i}`} handleClickFilter={props.handleClickFilter} type='platforms' slug={item} />)
+          doFilterBtns('platforms')
         }
       </div>
     </div>
-  )
-}
-
-function FilterButton(props) {
-  const { type, slug, handleClickFilter } = props
-  return (
-    <button
-      className={`filter filter-${type} filter-${type}--${slug}`}
-      onClick={() => {
-        handleClickFilter({type: type, slug: slug})
-      }}>
-      {slug}
-    </button>
   )
 }
 

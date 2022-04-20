@@ -7,13 +7,11 @@ import DemoFilters from '../../components/demos/DemoFilters'
 import { fetchApi } from '../../lib/api'
 
 export default function Demos({ pageData, demosData }) {
-  const { _demos, _filters } = parseDemosData(demosData)
-
   const [demos, setDemos] = useState(demosData)
 
-  function handleClickFilter(item) {
-    const { type, slug } = item
+  const { _demos, _filters } = parseDemosData(demosData)
 
+  function handleClickFilter({ type, slug }) {
     // filter _demos to match type and slug
     const filteredIds = _demos.filter(item => {
       return item[type][slug]
@@ -21,7 +19,7 @@ export default function Demos({ pageData, demosData }) {
 
     // Filter demos by matched IDs
     let filteredDemos = {
-      nodes: []
+      nodes: [] // match GraphQL response format for inital render compatibility
     }
     filteredIds.forEach(item => {
       for (let i = 0; i < demosData.nodes.length; i++) {
@@ -87,17 +85,29 @@ function parseDemosData(demosData) {
 
     item.technologies.nodes.forEach(item => {
       techObj[item.slug] = item.slug
-      _filters.tech[item.slug] = item.slug
+      _filters.tech[item.slug] = {
+        active: false,
+        slug: item.slug,
+        type: 'tech'
+      }
     })
 
     item.developmentTypes.nodes.forEach(item => {
       devObj[item.slug] = item.slug
-      _filters.dev[item.slug] = item.slug
+      _filters.dev[item.slug] = {
+        active: false,
+        slug: item.slug,
+        type: 'dev'
+      }
     })
 
     item.platforms.nodes.forEach(item => {
       platObj[item.slug] = item.slug
-      _filters.platforms[item.slug] = item.slug
+      _filters.platforms[item.slug] = {
+        active: false,
+        slug: item.slug,
+        type: 'platforms'
+      }
     })
 
     return {

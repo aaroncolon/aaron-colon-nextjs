@@ -33,11 +33,11 @@ class Demo extends React.Component {
   }
 
   render() {
-    const data         = this.props.data
-    const technologies = data.technologies.nodes.map(item => item.name).join(', ')
-    const devTypes     = data.developmentTypes.nodes.map(item => item.name).join(', ')
-    const platforms    = data.platforms.nodes.map(item => item.name).join(', ')
-    const links        = data.acfDemos.links.map((item, i) => {
+    const data         = this.props.data,
+          technologies = data.technologies.nodes.map(item => item.name).join(', '),
+          devTypes     = data.developmentTypes.nodes.map(item => item.name).join(', '),
+          platforms    = data.platforms.nodes.map(item => item.name).join(', '),
+          links        = data.acfDemos.links.map((item, i) => {
       return (
         <li key={`link-${i}`} className="demo__link">
           <a target="_blank" rel="noopener noreferrer" href={item.url}>{item.linkText}</a>
