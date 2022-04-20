@@ -18,7 +18,7 @@ function DemoFilters(props) {
         }
       }
     }
-    
+
     setFilters(filters)
   }
 
@@ -27,10 +27,26 @@ function DemoFilters(props) {
     let i = 0
     for (const prop in filters[_type]) {
       const { type, slug, active } = filters[_type][prop]
-      btns.push(<FilterButton key={`${_type}-${i}`} handleClickFilter={props.handleClickFilter} handleSetActive={handleSetFilters} type={type} slug={slug} active={active} />)
+      btns.push(
+        <FilterButton
+          key={`${_type}-${i}`}
+          handleClickFilter={props.handleClickFilter}
+          handleSetActive={handleSetFilters}
+          type={type}
+          slug={slug}
+          active={active} />
+      )
       i++
     }
-    return btns
+    return btns.sort((a, b) => {
+      if (a.props.slug < b.props.slug) {
+        return -1
+      }
+      if (b.props.slug > b.props.slug) {
+        return 1
+      }
+      return 0
+    })
   }
 
   return (
